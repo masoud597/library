@@ -77,12 +77,14 @@ public class MemberActivity extends AppCompatActivity {
         saveBtn.setOnClickListener(v -> {
             String result;
             if (inEditMode) {
+                // for when editing an item
                 ContentValues values = new ContentValues();
                 values.put("fullname", memberFNameTxt.getText().toString());
                 values.put("codemeli", itemInEdit.getCodeMeli());
                 values.put("canrent",memberCanRentSwitch.isChecked());
                 result = sqliteHelper.updateRecord("members",values,"codemeli",itemInEdit.getCodeMeli()) > 0 ? "موفق" : "خطا";
             }else {
+                // for when adding an item
                 if (!memberIDTxt.getText().toString().isEmpty()) {
                     Member newMember = new Member(memberFNameTxt.getText().toString(), memberIDTxt.getText().toString(), memberCanRentSwitch.isChecked());
                     result = sqliteHelper.addMember(newMember) > -1 ? "موفق" : "خطا";

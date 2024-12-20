@@ -77,6 +77,7 @@ public class BookActivity extends AppCompatActivity {
         saveBtn.setOnClickListener(v -> {
             String result;
             if (inEditMode) {
+                // for when editing an item
                 ContentValues values = new ContentValues();
                 values.put("name", bookName.getText().toString());
                 values.put("writer", bookWriter.getText().toString());
@@ -84,6 +85,7 @@ public class BookActivity extends AppCompatActivity {
                 values.put("shabak", itemInEdit.getShabak());
                 result = sqliteHelper.updateRecord("books",values,"shabak",itemInEdit.getShabak()) > 0 ? "موفق" : "خطا";
             }else {
+                // for when adding an item
                 int bookYearParsed;
                 try {
                     bookYearParsed = Integer.parseInt(bookYear.getText().toString());

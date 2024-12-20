@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#806750A3"
     tools:context=".MainActivity">
 
     <Button
@@ -12,19 +13,22 @@
         style="@style/Widget.AppCompat.Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="?attr/colorControlHighlight"
         android:text="خوش آمدید"
-        android:textSize="20sp"
+        android:textColor="#000000"
+        android:textSize="34sp"
         android:translationZ="0sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/mainList"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="45dp"
         android:layout_marginEnd="45dp"
-        android:gravity="center"
+        android:gravity="center|center_vertical"
         android:orientation="vertical"
         android:translationZ="0sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -39,12 +43,20 @@
             android:text="کتاب"
             android:textSize="48sp" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30sp" />
+
         <Button
             android:id="@+id/MemberBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="عضو"
             android:textSize="48sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30sp" />
 
         <Button
             android:id="@+id/LoanBtn"
@@ -62,22 +74,24 @@
         android:background="#FFFFFF"
         android:gravity="center"
         android:orientation="vertical"
-        android:translationZ="2sp"
-        android:visibility="invisible"
+        android:translationZ="100sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/editTextText"
+            android:id="@+id/NameText"
             style="@style/Widget.AppCompat.AutoCompleteTextView"
             android:layout_width="300sp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:gravity="center|center_vertical"
+            android:hint="نام و نام خانوادگی"
             android:inputType="text"
-            android:text="نام و نام خانوادگی"
+            android:textColor="@color/black"
+            android:textColorHint="#000000"
             android:textSize="24sp" />
 
         <Space
@@ -85,10 +99,11 @@
             android:layout_height="25sp" />
 
         <Switch
-            android:id="@+id/switch1"
+            android:id="@+id/RememberNameSwitch"
             android:layout_width="150sp"
             android:layout_height="wrap_content"
             android:text="به یاد بسپار"
+            android:textColor="#000000"
             android:textSize="24sp" />
 
         <Space
@@ -96,7 +111,7 @@
             android:layout_height="25sp" />
 
         <Button
-            android:id="@+id/button6"
+            android:id="@+id/SaveNameBtn"
             android:layout_width="150sp"
             android:layout_height="wrap_content"
             android:text="ذخیره"

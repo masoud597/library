@@ -24,6 +24,7 @@
         android:id="@+id/LoanList"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="#806750A3"
         android:translationZ="0sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,6 +54,7 @@
             android:hint="نام و نام خانوادگی"
             android:inputType="text"
             android:textColor="#000000"
+            android:textColorHint="#000000"
             android:textSize="34sp" />
 
         <EditText
@@ -64,6 +66,7 @@
             android:inputType="number"
             android:maxLength="10"
             android:textColor="#000000"
+            android:textColorHint="#000000"
             android:textSize="34sp" />
 
         <Switch
@@ -83,8 +86,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="visible">
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/BackBtn"

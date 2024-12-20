@@ -87,6 +87,7 @@ public class LoanActivity extends AppCompatActivity {
         saveBtn.setOnClickListener(v -> {
             String result;
             if (inEditMode) {
+                // for when editing an item
                 ContentValues values = new ContentValues();
                 values.put("id", itemInEdit.getCodeAmant());
                 values.put("codemeli", itemInEdit.getCodeMeli());
@@ -95,6 +96,7 @@ public class LoanActivity extends AppCompatActivity {
                 values.put("tahvil", loanTahvil.getText().toString());
                 result = sqliteHelper.updateRecord("loans",values,"id",String.valueOf(itemInEdit.getCodeAmant())) > 0 ? "موفق" : "خطا";
             }else {
+                // for when adding an item
                 Member user = sqliteHelper.getMember(memberCodeMeli.getText().toString());
                 if (user != null){
                     if (user.getCanRent()){
