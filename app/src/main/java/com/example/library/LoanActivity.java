@@ -20,7 +20,6 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -100,7 +99,13 @@ public class LoanActivity extends AppCompatActivity {
                 if (user != null){
                     if (user.getCanRent()){
                         if (sqliteHelper.getBook(bookShabak.getText().toString()) != null) {
-                            Loan newLoan = new Loan(sqliteHelper.getNextLoanId(), memberCodeMeli.getText().toString(),bookShabak.getText().toString(),loanDate.getText().toString(), Integer.parseInt(loanTahvil.getText().toString()));
+                            int loanTahvilParsed;
+                            try {
+                                loanTahvilParsed = Integer.parseInt(loanTahvil.getText().toString());
+                            }catch (NumberFormatException e){
+                                loanTahvilParsed = 0;
+                            }
+                            Loan newLoan = new Loan(sqliteHelper.getNextLoanId(), memberCodeMeli.getText().toString(),bookShabak.getText().toString(),loanDate.getText().toString(), loanTahvilParsed);
                             result = sqliteHelper.addLoan(newLoan) > -1 ? "موفق" : "خطا";
                         }else{result = "کتاب با این شابک وجود ندارد";}
                     }else{result = "عضو اجازه امانت ندارد";}
@@ -123,14 +128,14 @@ public class LoanActivity extends AppCompatActivity {
             memberCodeMeli.setText(itemInEdit.getCodeMeli());
             bookShabak.setText(itemInEdit.getShabak());
             loanDate.setText(itemInEdit.getTarikh());
-            loanTahvil.setText(loans.get(position).getTahvil());
+            loanTahvil.setText(String.valueOf(loans.get(position).getTahvil()));
             OptionBtnsView.setVisibility(View.VISIBLE);
             setupList();
         });
         deleteRecordBtn.setOnClickListener(v -> {
             inEditMode = false;
             newFormView.setVisibility(View.GONE);
-            sqliteHelper.deleteRecord("loan","id",String.valueOf(itemInEdit.getCodeAmant()));
+            sqliteHelper.deleteRecord("loans","id",String.valueOf(itemInEdit.getCodeAmant()));
             setupList();
             clearInputs();
         });
@@ -149,8 +154,8 @@ public class LoanActivity extends AppCompatActivity {
         int[] to = {android.R.id.text1, android.R.id.text2};
         loans.forEach(item -> {
             Map<String, String> itemToShow = new HashMap<>();
-            itemToShow.put("title",item.getCodeAmant() + "- امانت برای کدملی '" + item.getCodeMeli() + "' کتاب با شابک '" + item.getShabak() + "'");
-            itemToShow.put("subtitle", "در تاریخ '" + item.getTarikh() + "' به مدت '" + item.getTahvil() + "' روز");
+            itemToShow.put("title",item.getCodeAmant() + " - امانت در تاریخ '" + item.getTarikh() + "' به مدت '" + item.getTahvil() + "' روز");
+            itemToShow.put("subtitle", "کدملی: '" + item.getCodeMeli() + "' شابک: '" + item.getShabak() + "'");
             loanToShowList.add(itemToShow);
         });
         SimpleAdapter adapter = new SimpleAdapter(this, loanToShowList, android.R.layout.simple_list_item_2,from,to);

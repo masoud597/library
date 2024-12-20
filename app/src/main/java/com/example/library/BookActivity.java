@@ -84,8 +84,16 @@ public class BookActivity extends AppCompatActivity {
                 values.put("shabak", itemInEdit.getShabak());
                 result = sqliteHelper.updateRecord("books",values,"shabak",itemInEdit.getShabak()) > 0 ? "موفق" : "خطا";
             }else {
-                Book newBook = new Book(bookName.getText().toString(), bookWriter.getText().toString(),Integer.parseInt(bookYear.getText().toString()),bookShabak.getText().toString());
-                result = sqliteHelper.addBook(newBook) > -1 ? "موفق" : "خطا";
+                int bookYearParsed;
+                try {
+                    bookYearParsed = Integer.parseInt(bookYear.getText().toString());
+                }catch (NumberFormatException e){
+                    bookYearParsed = 0;
+                }
+                if (!bookShabak.getText().toString().isEmpty()) {
+                    Book newBook = new Book(bookName.getText().toString(), bookWriter.getText().toString(), bookYearParsed, bookShabak.getText().toString());
+                    result = sqliteHelper.addBook(newBook) > -1 ? "موفق" : "خطا";
+                }else{result = "شابک نمی تواند خالی باشد";}
             }
             newFormView.setVisibility(View.GONE);
             Toast.makeText(this,result,Toast.LENGTH_SHORT).show();
@@ -101,7 +109,7 @@ public class BookActivity extends AppCompatActivity {
             itemInEdit = books.get(position);
             bookName.setText(books.get(position).getName());
             bookWriter.setText(books.get(position).getWriter());
-            bookYear.setText(books.get(position).getYear());
+            bookYear.setText(String.valueOf(books.get(position).getYear()));
             bookShabak.setText(books.get(position).getShabak());
             OptionBtnsView.setVisibility(View.VISIBLE);
             setupList();
@@ -128,8 +136,8 @@ public class BookActivity extends AppCompatActivity {
         int[] to = {android.R.id.text1, android.R.id.text2};
         books.forEach(item -> {
             Map<String, String> itemToShow = new HashMap<>();
-            itemToShow.put("title","کتاب '" + item.getName() + "' توسط '" + item.getWriter() + "' در سال '" + item.getYear() + "'");
-            itemToShow.put("subtitle", "با شابک '" + item.getShabak() + "'");
+            itemToShow.put("title","کتاب '" + item.getName() + "' توسط '" + item.getWriter() + "'");
+            itemToShow.put("subtitle", "با شابک '" + item.getShabak() + "' در سال '" + item.getYear() + "'");
             bookToShowList.add(itemToShow);
         });
         SimpleAdapter adapter = new SimpleAdapter(this, bookToShowList, android.R.layout.simple_list_item_2,from,to);

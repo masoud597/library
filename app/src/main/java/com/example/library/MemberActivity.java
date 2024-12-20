@@ -83,8 +83,12 @@ public class MemberActivity extends AppCompatActivity {
                 values.put("canrent",memberCanRentSwitch.isChecked());
                 result = sqliteHelper.updateRecord("members",values,"codemeli",itemInEdit.getCodeMeli()) > 0 ? "موفق" : "خطا";
             }else {
-                Member newMember = new Member(memberFNameTxt.getText().toString(), memberIDTxt.getText().toString(), memberCanRentSwitch.isChecked());
-                result = sqliteHelper.addMember(newMember) > -1 ? "موفق" : "خطا";
+                if (!memberIDTxt.getText().toString().isEmpty()) {
+                    Member newMember = new Member(memberFNameTxt.getText().toString(), memberIDTxt.getText().toString(), memberCanRentSwitch.isChecked());
+                    result = sqliteHelper.addMember(newMember) > -1 ? "موفق" : "خطا";
+                }else {
+                    result = "کد ملی نمی تواند خالی باشد";
+                }
             }
             newFormView.setVisibility(View.GONE);
             Toast.makeText(this,result,Toast.LENGTH_SHORT).show();
@@ -124,8 +128,8 @@ public class MemberActivity extends AppCompatActivity {
         int[] to = {android.R.id.text1, android.R.id.text2};
         members.forEach(item -> {
             Map<String, String> itemToShow = new HashMap<>();
-            itemToShow.put("title","نام و نام خانوادگی : " + item.getFullName());
-            itemToShow.put("subtitle", "کد ملی : " + item.getCodeMeli() + ", اجازه امانت " + (item.getCanRent() ? "دارد" : "ندارد"));
+            itemToShow.put("title","نام و نام خانوادگی '" + item.getFullName() + "'");
+            itemToShow.put("subtitle", "کد ملی '" + item.getCodeMeli() + "' اجازه امانت " + (item.getCanRent() ? "دارد" : "ندارد"));
             memberToShowList.add(itemToShow);
         });
         SimpleAdapter adapter = new SimpleAdapter(this, memberToShowList, android.R.layout.simple_list_item_2,from,to);
