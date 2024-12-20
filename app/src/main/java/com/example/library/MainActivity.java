@@ -68,26 +68,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Button bookBtn = findViewById(R.id.BookBtn);
-        bookBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeActivity(BookActivity.class);
-            }
-        });
+        bookBtn.setOnClickListener(v -> changeActivity(BookActivity.class));
         Button memberBtn = findViewById(R.id.MemberBtn);
-        memberBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeActivity(MemberActivity.class);
-            }
-        });
+        memberBtn.setOnClickListener(v -> changeActivity(MemberActivity.class));
         Button loanBtn = findViewById(R.id.LoanBtn);
-        loanBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeActivity(LoanActivity.class);
-            }
-        });
+        loanBtn.setOnClickListener(v -> changeActivity(LoanActivity.class));
 
     }
     private void changeActivity(Class<?> moveTo){
