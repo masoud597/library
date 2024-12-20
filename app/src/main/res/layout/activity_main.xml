@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/WelcomeNameBtn"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="خوش آمدید"
+        android:textSize="20sp"
+        android:translationZ="0sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginEnd="45dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:translationZ="0sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/WelcomeNameBtn">
+
+        <Button
+            android:id="@+id/BookBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="کتاب"
+            android:textSize="48sp" />
+
+        <Button
+            android:id="@+id/MemberBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="عضو"
+            android:textSize="48sp" />
+
+        <Button
+            android:id="@+id/LoanBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="امانت"
+            android:textSize="48sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/AskNameView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:translationZ="2sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/editTextText"
+            style="@style/Widget.AppCompat.AutoCompleteTextView"
+            android:layout_width="300sp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="center|center_vertical"
+            android:inputType="text"
+            android:text="نام و نام خانوادگی"
+            android:textSize="24sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25sp" />
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:text="به یاد بسپار"
+            android:textSize="24sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25sp" />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:text="ذخیره"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
